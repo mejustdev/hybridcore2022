@@ -3,7 +3,7 @@ export default function preview(req, res) {
     return res.status(401).json({message: 'No secret token'})
   }
 
-  // Check the secret and next parameters
+
   // This secret should only be known to this API route and the CMS
   if (req.query.secret !== process.env.SANITY_PREVIEW_SECRET) {
     return res.status(401).json({message: 'Invalid secret token'})

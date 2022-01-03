@@ -1,7 +1,3 @@
-// ./studio/resolveProductionUrl.js
-
-
-
 // Replace `remoteUrl` with your deployed Next.js site
 const remoteUrl = `https://sanity-io-next-js-blog-one.vercel.app`
 const localUrl = `http://localhost:3000`

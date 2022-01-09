@@ -13,6 +13,7 @@ import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import Form from '../../components/form'
+import Link from 'next/link'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
@@ -40,9 +41,21 @@ export default function Post({ post, morePosts, preview }) {
                 date={post.date}
                 author={post.author}
               />
+
+              <PostBody content={post.excerpt} />
               <PostBody content={post.body} />
             </article>
-
+            {/* TODO: Post Card */}
+            <ul>
+          {post.relatedPosts?.map(({_id,slug,title,subtitle}) => (
+            <li key={_id}>
+              <Link as={`/posts/${slug}`} href="/posts/[slug]">
+                <a className="hover:underline">{ title}</a>
+              </Link>
+              {subtitle}
+            </li> ))
+          }
+          </ul>
             <Comments comments={post.comments} />
             <Form _id={post._id} />
 
@@ -57,10 +70,12 @@ export default function Post({ post, morePosts, preview }) {
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getPostAndMorePosts(params.slug, preview)
+
   return {
     props: {
       preview,
       post: data?.post || null,
+      excerpt: data?.post || null,
       morePosts: data?.morePosts || null,
     },
     revalidate: 1

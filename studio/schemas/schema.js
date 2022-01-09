@@ -1,31 +1,47 @@
-// First, we must import the schema creator
 import createSchema from 'part:@sanity/base/schema-creator'
-
-// Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
-// We import object and document schemas
-import blockContent from './blockContent'
-import category from './category'
-import post from './post'
-import author from './author'
 import comment from './comment'
+import page from './page'
+import hero from './hero'
+import simpleBlockContent from './simpleBlockContent'
 
-// Then we give our schema to the builder and provide the result to Sanity
+// Documents
+import category from './documents/category'
+import post from './documents/post'
+import author  from './documents/author'
+import menu  from './documents/menu'
+
+// Objects
+import bodyPortableText  from './objects/bodyPortableText'
+import excerptPortableText  from './objects/excerptPortableText'
+import bioPortableText  from './objects/bioPortableText'
+import youtube  from './objects/youtube'
+import instagram  from './objects/instagram'
+import mainImage  from './objects/mainImage'
+import menuItem  from './objects/menuItem'
+
+
+
 export default createSchema({
   // We name our schema
   name: 'default',
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    // The following are document types which will appear
-    // in the studio.
     post,
-    author,
     category,
-    // When added to this list, object types can be used as
-    // { type: 'typename' } in other document schemas
-    blockContent,
-    comment
+    author,
+    comment,
+    page,
+    hero,
+    simpleBlockContent,
+    bodyPortableText,
+    excerptPortableText,
+    bioPortableText,
+    mainImage,
+    youtube,
+    instagram,
+    menu,
+    menuItem,
+
   ])
 })

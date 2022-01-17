@@ -24,7 +24,7 @@ export default function Post({ post, preview ,previousPost , nextPost}) {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
-  console.log(post.body)
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -48,7 +48,7 @@ export default function Post({ post, preview ,previousPost , nextPost}) {
               />
 
               <PostBody content={post.excerpt} />
-              <PostBody content={post.body} />
+              <PostBody content={post?.body} />
             </article>
             {/* TODO: Post Card */}
             RELATED POSTS

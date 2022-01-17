@@ -1,9 +1,18 @@
 import { format } from "date-fns";
+import sanityClient from 'part:@sanity/base/client'
+const client = sanityClient.withConfig({ apiVersion: '2022-01-16' })
 
 export default {
   name: 'post',
   title: 'Post',
   type: 'document',
+//   validation: Rule => Rule.custom(async () => {
+
+//     const result = await client.fetch(`count(*[ _type == 'post' && isHighlighted && !(_id in path("drafts.**")) ])  <= 3`)
+
+// return result ? true : "You can select maximum 3 featured post, please check highligted posts number"
+//   }),
+
   fields: [
     {
       name: 'title',
@@ -52,40 +61,23 @@ export default {
       title: 'Main image',
       type: 'mainImage',
     },
-    // {
-    //   name: 'categories',
-    //   title: 'Categories',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'reference',
-    //       to: {
-    //         type: 'category'
-    //       }
-    //     }
-    //   ]
-    // },
     {
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}]
     },
-    // {
-    //   name: 'categories',
-    //   title: 'Categories',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'categoryReference',
-    //     }
-    //   ]
-    // },
     {
       name: 'body',
       title: 'Body',
       type: 'bodyPortableText'
-    }
+    },
+    // {
+    //   name: 'isHighlighted',
+    //   title: 'Do you want to highlight?',
+    //   type: 'boolean',
+    //   initialValue: false
+    // },
   ],
   orderings: [
     {
@@ -122,6 +114,7 @@ export default {
       title: "title",
       publishedAt: "publishedAt",
       media: "mainImage",
+
     },
     prepare({ title = "No title", publishedAt, media }) {
       const dateSegment = format(new Date(publishedAt), "d/M/yy");

@@ -20,6 +20,7 @@ import youtube  from './objects/youtube'
 import instagram  from './objects/instagram'
 import mainImage  from './objects/mainImage'
 import menuItem  from './objects/menuItem'
+import codepen  from './objects/codepen'
 
 
 
@@ -42,6 +43,7 @@ export default createSchema({
     instagram,
     menu,
     menuItem,
+    codepen
 
   ])
 })

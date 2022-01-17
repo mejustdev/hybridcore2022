@@ -1,8 +1,9 @@
-import '../styles/index.css'
+import 'styles/index.css'
+
 import NextApp from 'next/app';
-// import Layout from '../components/layout'
-import { SiteContext, useSiteContext } from '../lib/hooks/use-site';
-import {getMenu} from '../lib/api'
+// import Layout from 'components/layout'
+import { SiteContext, useSiteContext } from 'lib/hooks/use-site';
+import {getMenu} from 'lib/api'
 function MyApp({ Component, pageProps,menus }) {
 
   const site = useSiteContext({

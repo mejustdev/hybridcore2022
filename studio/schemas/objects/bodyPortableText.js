@@ -76,6 +76,7 @@ export default {
     },
     { type: 'youtube' },
     { type: 'instagram' },
+    { type: "codepen" }
 
   ],
 };

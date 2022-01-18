@@ -18,19 +18,19 @@ export default function Index({ allPosts,menu, preview, categories }) {
   const router = useRouter()
   const [formData, setFormData] = useState()
   const dynamicRoute = useRouter().asPath
-// console.log(allPosts)
+
 // TODO: Handle on Home page click reset state
   const handleClick = async (data) => {
-    let response
+
     try {
-        response = await fetch('/api/fetchCategory', {
+      const response = await fetch('/api/fetchCategory', {
         method: 'POST',
         body: JSON.stringify(data),
         type: 'application/json'
       })
       const result = await response.json()
+      setFormData(result)
 
-      setFormData(result.data)
     } catch (err) {
       setFormData(err)
     }
@@ -78,7 +78,7 @@ export default function Index({ allPosts,menu, preview, categories }) {
 {
   formData && (
     <ul>
-    {formData?.map(({_id,title,subtitle,slug}) => (
+    {formData?.data?.map(({_id,title,subtitle,slug}) => (
       <li key={_id}>
         <Link as={`/posts/${slug.current}`} href="/posts/[slug.current]">
           <a className="hover:underline">{ title}</a>

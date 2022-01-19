@@ -4,7 +4,7 @@ import CoverImage from 'components/cover-image'
 import PostTitle from 'components/post-title'
 
 
-export default function PostHeader({ title, coverImage,publishDate, updatedDate, author }) {
+export default function PostHeader({ title, coverImage,publishDate, updatedDate, author, estimatedReadingTime }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -23,6 +23,9 @@ export default function PostHeader({ title, coverImage,publishDate, updatedDate,
         </div>
         <div className="mb-6 text-lg">
           Updated : <Date dateString={updatedDate} />
+        </div>
+        <div className="mb-6 text-lg">
+        ReadingTime : {estimatedReadingTime}
         </div>
       </div>
     </>

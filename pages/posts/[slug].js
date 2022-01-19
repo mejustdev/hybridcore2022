@@ -45,6 +45,7 @@ export default function Post({ post, preview ,previousPost , nextPost}) {
                 publishDate={post.publishDate}
                 updatedDate={post.updatedDate}
                 author={post.author}
+                estimatedReadingTime={post.estimatedReadingTime}
               />
 
               <PostBody content={post.excerpt} />

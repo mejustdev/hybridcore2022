@@ -65,7 +65,8 @@ export default function Index({ allPosts,menu, preview, categories }) {
     <ul>
     {filteredPostsByCategory.map(({_id,title,subtitle,slug}) => (
       <li key={_id}>
-        <Link as={`/posts/${slug.current}`} href="/posts/[slug.current]">
+          {console.log(slug)}
+        <Link as={`/posts/${slug}`} href="/posts/[slug]">
           <a className="hover:underline">{ title}</a>
         </Link>
         {subtitle}

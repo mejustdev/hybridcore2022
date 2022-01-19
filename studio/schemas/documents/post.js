@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import sanityClient from 'part:@sanity/base/client'
-const client = sanityClient.withConfig({ apiVersion: '2022-01-16' })
+const client = sanityClient.withConfig({ apiVersion: '2021-08-31' })
 
 export default {
   name: 'post',

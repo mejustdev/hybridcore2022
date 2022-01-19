@@ -15,26 +15,12 @@ import { CMS_NAME } from 'lib/constants'
 
 
 export default function Index({ allPosts,menu, preview, categories }) {
-  const router = useRouter()
-  const [formData, setFormData] = useState()
-  const dynamicRoute = useRouter().asPath
 
-// TODO: Handle on Home page click reset state
-  const handleClick = async (data) => {
+  const [tagValue, setTagValue] = useState('')
 
-    try {
-      const response = await fetch('/api/fetchCategory', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        type: 'application/json'
-      })
-      const result = await response.json()
-      setFormData(result)
+  const filteredPostsByCategory = allPosts?.filter((post) =>
+  post.categories?.includes(tagValue))
 
-    } catch (err) {
-      setFormData(err)
-    }
-};
   return (
     <>
       <Layout preview={preview} menu={menu}>
@@ -42,16 +28,15 @@ export default function Index({ allPosts,menu, preview, categories }) {
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
         <div>
-
           <ul>
             {categories?.map(({_id,title,count}) => (
-              <li key={_id} onClick={() => handleClick(title)}>
+              <li key={_id} onClick={() => setTagValue(title)}>
               {title}{count}
               </li> ))
             }
           </ul>
           {
-            !formData && (
+            !tagValue && (
               <Container>
                 <ul>
                   {allPosts.map(({_id,slug,title,subtitle,categories,publishedAt}) => (
@@ -76,9 +61,9 @@ export default function Index({ allPosts,menu, preview, categories }) {
             )
           }
 {
-  formData && (
+  tagValue && (
     <ul>
-    {formData?.data?.map(({_id,title,subtitle,slug}) => (
+    {filteredPostsByCategory.map(({_id,title,subtitle,slug}) => (
       <li key={_id}>
         <Link as={`/posts/${slug.current}`} href="/posts/[slug.current]">
           <a className="hover:underline">{ title}</a>

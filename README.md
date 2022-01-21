@@ -23,11 +23,11 @@ Series
 
 Featured
 
-Reading time
+
 
 Order post publish/created?
 
-
+https://blog.webdevsimplified.com/
 ----------------
 
 
@@ -37,3 +37,6 @@ Last updated +++
 
 If no related blog, create previous next blog
 Or together : first previous next later related posts  +++
+
+
+Reading time

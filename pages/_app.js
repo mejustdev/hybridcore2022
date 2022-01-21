@@ -2,6 +2,7 @@ import 'styles/index.css'
 
 import NextApp from 'next/app';
 // import Layout from 'components/layout'
+import { ThemeProvider } from 'next-themes'
 import { SiteContext, useSiteContext } from 'lib/hooks/use-site';
 import {getMenu} from 'lib/api'
 function MyApp({ Component, pageProps,menus }) {
@@ -11,9 +12,11 @@ function MyApp({ Component, pageProps,menus }) {
   });
 
   return (
-    <SiteContext.Provider value={site}>
+    <ThemeProvider>
+      <SiteContext.Provider value={site}>
         <Component {...pageProps} />
-    </SiteContext.Provider>
+      </SiteContext.Provider>
+    </ThemeProvider>
   )
 }
 MyApp.getInitialProps = async function (appContext) {

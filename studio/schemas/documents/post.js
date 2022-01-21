@@ -72,6 +72,7 @@ export default {
       title: 'Body',
       type: 'bodyPortableText'
     },
+
     // {
     //   name: 'isHighlighted',
     //   title: 'Do you want to highlight?',

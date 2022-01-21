@@ -1,21 +1,18 @@
-import React ,{useState,useEffect } from 'react'
+import React ,{useState} from 'react'
 import Link from 'next/link'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useTheme } from 'next-themes'
 
 import Container from 'components/container'
-import MoreStories from 'components/more-stories'
-import HeroPost from 'components/hero-post'
-import Intro from 'components/intro'
+
 import Layout from 'components/layout'
 import Date from 'components/date'
 
 import { getAllPosts, getMenu, getAllCategories } from 'lib/api'
-import { CMS_NAME } from 'lib/constants'
+
 
 
 export default function Index({ allPosts,menu, preview, categories }) {
-
+  const { theme, setTheme } = useTheme()
   const [tagValue, setTagValue] = useState('')
 
   const filteredPostsByCategory = allPosts?.filter((post) =>
@@ -24,9 +21,11 @@ export default function Index({ allPosts,menu, preview, categories }) {
   return (
     <>
       <Layout preview={preview} menu={menu}>
-        <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
-        </Head>
+      <div>
+      The current theme is: {theme}
+      <button onClick={() => setTheme('light')}>Light Mode</button>
+      <button onClick={() => setTheme('dark')}>Dark Mode</button>
+    </div>
         <div>
           <ul>
             {categories?.map(({_id,title,count}) => (

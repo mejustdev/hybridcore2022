@@ -13,15 +13,11 @@ export default function Header() {
         <ul>
           {navItem?.map(({link}) => (
             <li key={link._id}>
-              {link.slug == 'home' ?
+
               <Link as={`/`} href="/">
                 <a className="hover:underline">{link.title}</a>
               </Link>
-              :
-              <Link as={`/${link.slug}`} href="/[link.slug]">
-                <a className="hover:underline">{link.title}</a>
-              </Link>
-}
+
             </li> ))
           }
         </ul>

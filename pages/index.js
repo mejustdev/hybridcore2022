@@ -1,31 +1,22 @@
-import React ,{useState} from 'react'
+import React ,{ useState} from 'react'
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
 
 import Container from 'components/container'
-
 import Layout from 'components/layout'
 import Date from 'components/date'
 
 import { getAllPosts, getMenu, getAllCategories } from 'lib/api'
 
 
-
 export default function Index({ allPosts,menu, preview, categories }) {
-  const { theme, setTheme } = useTheme()
-  const [tagValue, setTagValue] = useState('')
 
+  const [tagValue, setTagValue] = useState('')
   const filteredPostsByCategory = allPosts?.filter((post) =>
   post.categories?.includes(tagValue))
 
   return (
     <>
       <Layout preview={preview} menu={menu}>
-      <div>
-      The current theme is: {theme}
-      <button onClick={() => setTheme('light')}>Light Mode</button>
-      <button onClick={() => setTheme('dark')}>Dark Mode</button>
-    </div>
         <div>
           <ul>
             {categories?.map(({_id,title,count}) => (

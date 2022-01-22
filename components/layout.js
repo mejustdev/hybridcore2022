@@ -1,14 +1,14 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 
 import PreviewAlert from 'components/previewAlert'
-import { useRouter } from 'next/router';
 import Footer from 'components/footer'
 import Header from 'components/header'
 
 import { HOME_OG_IMAGE_URL } from 'lib/constants'
-// import Meta from 'components/meta'
 
 export default function Layout({ preview,children,...custom_meta }) {
+
 
   const router = useRouter();
   const meta = {

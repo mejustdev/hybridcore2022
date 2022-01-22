@@ -23,8 +23,10 @@ Series
 
 Featured
 
+https://vercel.com/docs/concepts/next.js/incremental-static-regeneration last 3 examples
+https://github.com/vercel/examples/tree/main/solutions/static-tweets-tailwind
 
-
+https://robertmarshall.dev/blog/lazy-load-youtube-video-iframe-show-on-scroll/
 Order post publish/created?
 
 https://blog.webdevsimplified.com/

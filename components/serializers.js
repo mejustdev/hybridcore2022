@@ -4,14 +4,25 @@ import MainImage from "./mainImage";
 import ReactPlayer from "react-player";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Codepen from "react-codepen-embed";
+import {Quote,Highlight} from './marks'
+
 
 
 const serializers = {
   // codepen: ({ node }) => ( <pre> {JSON.stringify(node,null,2)}</pre>),
+  marks: {
+    internalLink: ({mark, children}) => {
+      const {slug = {}} = mark
+      const href = `/posts/${slug}`
+      return <a href={href}>{children}</a>
+    },
+    highlight: Highlight,
+       quote : Quote
+  },
   types: {
     mainImage: ({ node }) => <MainImage mainImage={node} />,
     youtube: ({ node }) => <ReactPlayer className="mx-auto" url={node.url} controls />,
-    instagram: ({ node }) => {JSON.stringify(node,null,2)},
+    // instagram: ({ node }) => {JSON.stringify(node,null,2)},
     codepen: ({ node }) => {
     const splitURL = node.url.split("/");
     // [ 'https:', '', 'codepen.io', 'sdras', 'pen', 'gWWQgb' ]

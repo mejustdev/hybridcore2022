@@ -1,3 +1,13 @@
+import React from 'react'
+import {Quote,Highlight} from '../marks'
+
+const highlightIcon = () => (
+  <span style={{fontWeight: 'bold'}}>H</span>
+  )
+const quoteIcon = () => (
+  <span style={{fontWeight: 'bold'}}>Q</span>
+  )
+
 export default {
   title: "Post body",
   name: "bodyPortableText",
@@ -16,7 +26,8 @@ export default {
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
-        { title: "Quote", value: "blockquote" },
+        // { title: "Quote", value: "blockquote" },
+
       ],
       lists: [
         { title: "Bullet", value: "bullet" },
@@ -30,8 +41,17 @@ export default {
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
           { title: 'Highlight', value: 'highlight', blockEditor: {
-            icon: () => 'H'
-          } }
+            icon: highlightIcon,
+            render: Highlight
+          } },
+          {
+            title: 'Quote',
+            value: 'quote',
+            blockEditor: {
+              icon: quoteIcon,
+              render: Quote
+            }
+          },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -75,7 +95,7 @@ export default {
       type: 'code',
     },
     { type: 'youtube' },
-    { type: 'instagram' },
+    // { type: 'instagram' },
     { type: "codepen" }
 
   ],

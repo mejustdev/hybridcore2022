@@ -19,7 +19,7 @@ import Date from 'components/date'
 import { getAllPostsWithSlug, getPost } from 'lib/api'
 
 
-export default function Post({ post = {}, preview ,previousPost , nextPost}) {
+export default function Post({ post, preview ,previousPost , nextPost}) {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
@@ -29,9 +29,9 @@ export default function Post({ post = {}, preview ,previousPost , nextPost}) {
     <Layout
     preview={preview}
     // Custom Meta
-    title={`${post?.title} – ${post.author?.name}`}
+    title={`${post?.title} – ${post?.author?.name}`}
     description={post?.excerpt}
-    image={post.author?.picture}
+    image={post?.author?.picture}
     // TODO: Fix date
     // date={<Date dateString={post?.publishDate} />}
     type="article"
@@ -53,7 +53,7 @@ export default function Post({ post = {}, preview ,previousPost , nextPost}) {
                 estimatedReadingTime={post.estimatedReadingTime}
               />
 
-              <PostBody content={post.excerpt} />
+              <PostBody content={post?.excerpt} />
               <PostBody content={post?.body} />
             </article>
             {/* TODO: Post Card */}
@@ -98,7 +98,7 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       preview,
       post: data?.currentPost || null,
-      excerpt: data?.post || null,
+      excerpt: data?.excerpt || null,
       previousPost: data?.previousPost || null,
       nextPost: data?.nextPost || null,
     },
@@ -108,12 +108,13 @@ export async function getStaticProps({ params, preview = false }) {
 
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug()
-
+console.log(allPosts)
   return {
     paths:
       allPosts?.map((post) => ({
         params: {
           slug: post.slug,
+
         },
       })) || [],
     fallback: true,

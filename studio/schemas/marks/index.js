@@ -25,3 +25,9 @@ export function Highlight({ children }) {
     <span style={{ backgroundColor: 'yellow' }}>{children}</span>
   )
 }
+
+export function InlineCode({ children }) {
+  return (
+    <code style={{ backgroundColor: 'red', color: 'yellow' }}>{children}</code>
+  )
+}

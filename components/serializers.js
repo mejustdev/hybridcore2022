@@ -4,8 +4,31 @@ import MainImage from "./mainImage";
 import ReactPlayer from "react-player";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Codepen from "react-codepen-embed";
-import {Quote,Highlight} from './marks'
+import {Highlight,InlineCode} from './marks'
+import BlockContent from '@sanity/block-content-to-react'
 
+const BlockRenderer = (props) => {
+  const {style = 'normal'} = props.node
+    if (style === 'blockquote') {
+      return <blockquote style={{
+        backgroundColor: 'yellow',
+        borderColor:"currentColor",
+        borderLeftWidth:"2px",
+        borderRadius:"0.5rem",
+        borderRightWidth:"2px",
+        display:"block",
+        marginBottom:"0.75rem",
+        marginTop:"0",
+        paddingBottom:"0.5rem",
+        paddingLeft:"1rem",
+        paddingRight:"1rem",
+        paddingTop:"0.5rem",
+        position:"relative",
+      }}>{props.children}</blockquote>;
+    }
+  // Fall back to default handling
+  return BlockContent.defaultSerializers.types.block(props)
+}
 
 
 const serializers = {
@@ -17,25 +40,24 @@ const serializers = {
       return <a href={href}>{children}</a>
     },
     highlight: Highlight,
-       quote : Quote
+    inlineCode : InlineCode
   },
   types: {
+    block: BlockRenderer,
     mainImage: ({ node }) => <MainImage mainImage={node} />,
     youtube: ({ node }) => <ReactPlayer className="mx-auto" url={node.url} controls />,
     // instagram: ({ node }) => {JSON.stringify(node,null,2)},
     codepen: ({ node }) => {
-    const splitURL = node.url.split("/");
-    // [ 'https:', '', 'codepen.io', 'sdras', 'pen', 'gWWQgb' ]
-    const [, , , user, , hash] = splitURL;
-  // const embedUrl = `https://codepen.io/${user}/embed/${hash}?height=370&theme-id=dark&default-tab=result`;
+      const splitURL = node.url.split("/");
+      // [ 'https:', '', 'codepen.io', 'sdras', 'pen', 'gWWQgb' ]
+      const [, , , user, , hash] = splitURL;
+      // const embedUrl = `https://codepen.io/${user}/embed/${hash}?height=370&theme-id=dark&default-tab=result`;
 
-   return  <Codepen
-    hash = {hash}
-    user= {user}
-    loader={() => <div>Loading...</div>}
-  />
+        return  <Codepen
+          hash = {hash}
+          user= {user}
+          loader={() => <div>Loading...</div>}/>
     },
-
     twitter: ({node}) => {
       const twitId = node.id;
     return <div>{twitId}</div>},

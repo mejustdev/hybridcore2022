@@ -14,7 +14,7 @@ Feature image of post design
 
 Code dropdown
 
-Open graph
+
 
 
 Benlammers github
@@ -32,7 +32,7 @@ Order post publish/created?
 https://blog.webdevsimplified.com/
 ----------------
 
-
+Open graph
 Recreating ...codepen for sanity bookmarks  +++
 
 Last updated +++

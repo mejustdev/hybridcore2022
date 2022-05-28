@@ -1,11 +1,11 @@
 import React from 'react'
-import {Quote,Highlight} from '../marks'
+import {Highlight,InlineCode} from '../marks'
 
 const highlightIcon = () => (
   <span style={{fontWeight: 'bold'}}>H</span>
   )
-const quoteIcon = () => (
-  <span style={{fontWeight: 'bold'}}>Q</span>
+const codeIcon = () => (
+  <code style={{fontWeight: 'bold'}}>C</code>
   )
 
 export default {
@@ -26,7 +26,7 @@ export default {
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
-        // { title: "Quote", value: "blockquote" },
+        { title: "Quote", value: "blockquote" },
 
       ],
       lists: [
@@ -40,16 +40,21 @@ export default {
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
-          { title: 'Highlight', value: 'highlight', blockEditor: {
-            icon: highlightIcon,
-            render: Highlight
-          } },
-          {
-            title: 'Quote',
-            value: 'quote',
+          { title: "Underline", value: "underline" },
+          { title: "Strike", value: "strike-through" },
+          { title: 'Highlight',
+            value: 'highlight',
             blockEditor: {
-              icon: quoteIcon,
-              render: Quote
+              icon: highlightIcon,
+              render: Highlight
+            }
+          },
+          {
+            title: 'Inline Code',
+            value: 'inlineCode',
+            blockEditor: {
+              icon: codeIcon,
+              render: InlineCode
             }
           },
         ],

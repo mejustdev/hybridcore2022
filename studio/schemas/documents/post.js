@@ -17,17 +17,20 @@ export default {
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required()
     },
     {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
+      validation: Rule => Rule.required()
     },
     {
       name: 'excerpt',
       title: 'Excerpt',
       type: 'excerptPortableText',
+      validation: Rule => Rule.required()
     },
     {
       name: 'slug',
@@ -72,18 +75,11 @@ export default {
       title: 'Body',
       type: 'bodyPortableText'
     },
-
-    // {
-    //   name: 'isHighlighted',
-    //   title: 'Do you want to highlight?',
-    //   type: 'boolean',
-    //   initialValue: false
-    // },
   ],
   orderings: [
     {
       name: "publishingDateAsc",
-      title: "Publishing date new–>old",
+      title: "Publishing date new->old",
       by: [
         {
           field: "publishedAt",

@@ -1,11 +1,11 @@
 {
   "root": true,
   "api": {
-    "projectId": "el8kf8uk",
+    "projectId": "tlhhmne1",
     "dataset": "production"
   },
   "project": {
-    "name": "Next.js Comment-enabled blog",
+    "name": "Hybridcore",
     "basePath": "/studio"
   },
   "plugins": [
@@ -20,9 +20,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [

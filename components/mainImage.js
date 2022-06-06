@@ -1,17 +1,23 @@
-import React from "react";
-import { imageBuilder } from "../lib/sanity";
+import React from 'react';
+import { imageBuilder } from '../lib/sanity';
 
-const MainImage = ({ mainImage, width = 1200 }) => {
+const MainImage = ({ mainImage, url, width = 1200 }) => {
   const imgUrl =
     mainImage &&
     imageBuilder(mainImage)
       .width(width)
       .height(Math.floor((9 / 16) * width))
-      .fit("crop")
-      .auto("format")
+      .fit('crop')
+      .auto('format')
       .url();
 
-  return imgUrl ? <img src={imgUrl} alt={mainImage.alt || ""} /> : <></>;
+  return imgUrl ? (
+    <a href={url} target='blank'>
+      <img src={imgUrl} alt={mainImage.alt || ''} />{' '}
+    </a>
+  ) : (
+    <></>
+  );
 };
 
 export default MainImage;

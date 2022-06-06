@@ -4,37 +4,31 @@ export default {
   title: 'Hero',
   fields: [
     {
-      name: 'label',
-      type: 'string'
-    },
-    {
-      name: 'heading',
+      name: 'title',
       type: 'string',
-      title: 'Heading'
+      title: 'Title',
     },
     {
-      name: 'tagline',
-      type: 'simpleBlockContent'
+      name: 'subtitle',
+      type: 'simpleBlockContent',
+      title: 'Subtitle',
     },
-    // {
-    //   name: 'illustration',
-    //   type: 'illustration'
-    // },
-    // {
-    //   name: 'cta',
-    //   type: 'cta'
-    // }
+    {
+      name: 'mainImage',
+      type: 'mainImage',
+      title: 'Image',
+    },
   ],
-  preview: {
-    select: {
-      title: 'heading',
-      subtitle: 'label',
-      disabled: 'disabled'
-    },
-    prepare({ title, disabled }) {
-      return {
-        title: `Hero: ${disabled ? 'DISABLED' : title}`
-      }
-    }
-  }
-}
+  // preview: {
+  //   select: {
+  //     title: 'heading',
+  //     subtitle: 'label',
+  //     disabled: 'disabled',
+  //   },
+  //   prepare({ title, disabled }) {
+  //     return {
+  //       title: `Hero: ${disabled ? 'DISABLED' : title}`,
+  //     };
+  //   },
+  // },
+};

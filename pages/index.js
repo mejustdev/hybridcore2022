@@ -15,7 +15,7 @@ import TextBlock from 'components/textBlock';
 export default function Index({ allPosts, menu, preview, categories, reusableBlocks }) {
   const [tagValue, setTagValue] = useState('');
   const filteredPostsByCategory = allPosts?.filter((post) => post.categories?.includes(tagValue));
-
+  console.log('All posts: ', allPosts);
   return (
     <>
       <Layout preview={preview} menu={menu}>
@@ -41,7 +41,7 @@ export default function Index({ allPosts, menu, preview, categories, reusableBlo
         </div>
 
         {console.log(reusableBlocks)}
-        {reusableBlocks.pageBuilder?.map((block) => (
+        {reusableBlocks?.pageBuilder?.map((block) => (
           <div key={block._key}>
             {/* HERO START -------------------------------------------- */}
             {block._type == 'hero' && (
@@ -106,8 +106,8 @@ export default function Index({ allPosts, menu, preview, categories, reusableBlo
           </div>
         ))}
 
-        <div>{reusableBlocks.partners?.header}</div>
-        {reusableBlocks.partners?.logos.map((logo) => (
+        <div>{reusableBlocks?.partners?.header}</div>
+        {reusableBlocks?.partners?.logos.map((logo) => (
           <div key={logo._key}>
             <MainImage mainImage={logo} url={logo.externalUrl} width={300} />
           </div>

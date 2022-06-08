@@ -6,11 +6,16 @@ export default {
   name: 'page',
   type: 'document',
   title: 'Page',
-  // fieldsets: [
+  // groups: [
   //   {
-  //     name: 'general',
-  //     title: 'General',
-  //     options: { columns: 2, collapsible: true, collapsed: false },
+  //     name: 'team',
+  //     title: 'Team',
+  //     hidden: ({ parent }) => parent?.title !== 'Team',
+  //   },
+  //   {
+  //     name: 'advisors',
+  //     title: 'Advisors',
+  //     hidden: ({ parent }) => parent?.title !== 'Team',
   //   },
   // ],
   fields: [
@@ -21,6 +26,15 @@ export default {
       // fieldset: 'general',
       description: 'Title of the page',
       validation: (Rule) => Rule.required(),
+      // readOnly: true,
+    },
+    {
+      name: 'headerTitle',
+      title: 'Page header title',
+      type: 'string',
+      // validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => parent?.title === 'Home',
+      // group: 'team',
     },
     {
       name: 'pageBuilder',
@@ -32,15 +46,26 @@ export default {
         { type: 'textBlock' },
         { type: 'icon' },
         { type: 'mainImage' },
+        { type: 'textSlider' },
       ],
-      hidden: ({ parent }) => parent?.title !== 'Home',
+      hidden: ({ parent }) => parent?.title === 'Team',
     },
+
     {
       name: 'teamBuilder',
       type: 'array',
-      title: 'Team',
+      title: 'Team members',
       of: [{ type: 'iconListItem' }],
       hidden: ({ parent }) => parent?.title !== 'Team',
+      // group: 'team',
+    },
+    {
+      name: 'advisorsTitle',
+      title: 'Title for advisors',
+      type: 'string',
+      // validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => parent?.title !== 'Team',
+      // group: 'advisors',
     },
     {
       name: 'advisoryBuilder',
@@ -48,6 +73,7 @@ export default {
       title: 'Advisory',
       of: [{ type: 'iconListItem' }],
       hidden: ({ parent }) => parent?.title !== 'Team',
+      // group: 'advisors',
     },
     {
       type: 'partners',

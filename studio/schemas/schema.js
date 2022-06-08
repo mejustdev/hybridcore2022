@@ -28,6 +28,7 @@ import logo from './objects/logo';
 import menuItem from './objects/menuItem';
 import codepen from './objects/codepen';
 import textBlock from './objects/textBlock';
+import textSlider from './objects/textSlider';
 import link from './objects/link';
 
 export default createSchema({
@@ -56,6 +57,7 @@ export default createSchema({
     partners,
     logo,
     textBlock,
+    textSlider,
     link,
   ]),
 });

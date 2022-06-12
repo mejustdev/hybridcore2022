@@ -15,7 +15,7 @@ import TextBlock from 'components/textBlock';
 export default function Index({ allPosts, menu, preview, categories, reusableBlocks }) {
   const [tagValue, setTagValue] = useState('');
   const filteredPostsByCategory = allPosts?.filter((post) => post.categories?.includes(tagValue));
-  console.log('All posts: ', allPosts);
+  console.log('All menu: ', menu);
   return (
     <>
       <Layout preview={preview} menu={menu}>

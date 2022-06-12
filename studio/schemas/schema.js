@@ -30,6 +30,7 @@ import codepen from './objects/codepen';
 import textBlock from './objects/textBlock';
 import textSlider from './objects/textSlider';
 import link from './objects/link';
+import menuParentItem from './objects/menuParentItem';
 
 export default createSchema({
   // We name our schema
@@ -59,5 +60,6 @@ export default createSchema({
     textBlock,
     textSlider,
     link,
+    menuParentItem,
   ]),
 });

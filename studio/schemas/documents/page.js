@@ -6,6 +6,7 @@ export default {
   name: 'page',
   type: 'document',
   title: 'Page',
+
   // groups: [
   //   {
   //     name: 'team',
@@ -28,6 +29,15 @@ export default {
       validation: (Rule) => Rule.required(),
       // readOnly: true,
     },
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+      },
+    },
+
     {
       name: 'headerTitle',
       title: 'Page header title',

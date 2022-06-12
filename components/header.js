@@ -6,10 +6,13 @@ import { useTheme } from 'next-themes';
 import useSite from '../lib/hooks/use-site';
 import cn from 'classnames';
 
-function NavItem({ href, title }) {
+import { slugify } from '../lib/helpers';
+
+function NavItem(href, title) {
+  console.log('TITLeaddaa', title);
   const router = useRouter();
   const isActive = router.asPath === href;
-
+  // const { parentTitle, childTitle } = title;
   return (
     <NextLink href={href}>
       <a
@@ -19,7 +22,7 @@ function NavItem({ href, title }) {
             : 'font-normal text-gray-600 dark:text-gray-400',
         )}
       >
-        <span>{title}</span>
+        {title}
       </a>
     </NextLink>
   );
@@ -31,16 +34,43 @@ export default function Header() {
 
   useEffect(() => setMounted(true), []);
 
-  const data = useSite();
-  const navItem = data.menus[0]?.menuItems;
+  const { menus } = useSite();
+  console.log('DATA', menus);
 
   return (
     <>
       <h2 className='text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8'>
-        {navItem?.map(({ link }) => {
-          let { _id, slug, title } = link;
-          slug = slug == 'home' ? '/' : `/${slug}`;
-          return <NavItem key={_id} href={slug} title={title} />;
+        {menus?.map(({ parentText, routesDirect, routesUnderParent }) => {
+          const slugifiedParent = slugify(parentText);
+
+          return (
+            <div className='flex flex-col md:flex-row items-center'>
+              {parentText ? (
+                <div>
+                  <div>{parentText}</div>
+                  <div>
+                    {routesDirect?.map((el) => {
+                      const slugifiedExternalUrlText = slugify(el?.externalUrlText);
+                      return (
+                        <a
+                          href={`
+                          ${slugifiedParent}/${el?.slug ?? slugifiedExternalUrlText}`}
+                        >
+                          {el?.title ?? el?.externalUrlText}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  {routesUnderParent?.map((el) => {
+                    return <a href={el.slug == 'home' ? '/' : el.slug}>{el.title}</a>;
+                  })}
+                </div>
+              )}
+            </div>
+          );
         })}
       </h2>
       <button

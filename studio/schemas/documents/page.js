@@ -1,4 +1,5 @@
 // page.js
+import { HiFolderOpen } from 'react-icons/hi';
 
 export default {
   // Setup a 'document' type to house the page builder field
@@ -6,7 +7,7 @@ export default {
   name: 'page',
   type: 'document',
   title: 'Page',
-
+  icon: HiFolderOpen,
   // groups: [
   //   {
   //     name: 'team',
@@ -31,13 +32,17 @@ export default {
     },
     {
       name: 'slug',
-      title: 'Slug',
       type: 'slug',
+      title: 'Slug',
+      description: 'Automatically generate from Title of the page',
       options: {
         source: 'title',
+        maxLength: 96,
       },
+      hidden: ({ parent }) => parent.isParentText === false,
+      validation: (Rule) =>
+        Rule.required().warning('Please only click the button without typing for now'),
     },
-
     {
       name: 'headerTitle',
       title: 'Page header title',

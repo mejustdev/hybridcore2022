@@ -49,7 +49,7 @@ export default function Header() {
                 <div>
                   <div>{parentText}</div>
                   <div>
-                    {routesDirect?.map((el) => {
+                    {routesUnderParent?.map((el) => {
                       const slugifiedExternalUrlText = slugify(el?.externalUrlText);
                       return (
                         <a
@@ -64,7 +64,7 @@ export default function Header() {
                 </div>
               ) : (
                 <div>
-                  {routesUnderParent?.map((el) => {
+                  {routesDirect?.map((el) => {
                     return <a href={el.slug == 'home' ? '/' : el.slug}>{el.title}</a>;
                   })}
                 </div>

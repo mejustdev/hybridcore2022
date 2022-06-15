@@ -1,7 +1,7 @@
 import createSchema from 'part:@sanity/base/schema-creator';
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 
-import comment from './comment';
+// import comment from './comment';
 
 import hero from './hero';
 import iconList from './iconList';
@@ -10,7 +10,7 @@ import iconListItem from './iconListItem';
 import simpleBlockContent from './simpleBlockContent';
 
 // Documents
-import category from './documents/category';
+// import category from './documents/category';
 import post from './documents/post';
 import author from './documents/author';
 import menu from './documents/menu';
@@ -26,20 +26,19 @@ import mainImage from './objects/mainImage';
 import icon from './objects/icon';
 import logo from './objects/logo';
 import menuItem from './objects/menuItem';
-import codepen from './objects/codepen';
+// import codepen from './objects/codepen';
 import textBlock from './objects/textBlock';
 import textSlider from './objects/textSlider';
 import link from './objects/link';
-import menuParentItem from './objects/menuParentItem';
 
 export default createSchema({
   // We name our schema
   name: 'default',
   types: schemaTypes.concat([
     post,
-    category,
+    // category,
     author,
-    comment,
+    // comment,
     page,
     hero,
     simpleBlockContent,
@@ -52,7 +51,7 @@ export default createSchema({
     instagram,
     menu,
     menuItem,
-    codepen,
+    // codepen,
     iconList,
     iconListItem,
     partners,
@@ -60,6 +59,5 @@ export default createSchema({
     textBlock,
     textSlider,
     link,
-    menuParentItem,
   ]),
 });

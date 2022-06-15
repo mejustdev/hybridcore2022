@@ -2,10 +2,12 @@ import { format } from 'date-fns';
 import sanityClient from 'part:@sanity/base/client';
 const client = sanityClient.withConfig({ apiVersion: '2021-03-25' });
 
+import { MdPostAdd } from 'react-icons/md';
 export default {
   name: 'post',
   title: 'Post',
   type: 'document',
+  icon: MdPostAdd,
   //   validation: Rule => Rule.custom(async () => {
 
   //     const result = await client.fetch(`count(*[ _type == 'post' && isHighlighted && !(_id in path("drafts.**")) ])  <= 3`)
@@ -21,6 +23,19 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      description: 'Automatically generate from Title of the post',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+      hidden: ({ parent }) => parent.isParentText === false,
+      validation: (Rule) =>
+        Rule.required().warning('Please only click the button without typing for now'),
+    },
+    {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
@@ -32,15 +47,7 @@ export default {
       type: 'excerptPortableText',
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
-    },
+
     {
       name: 'publishedAt',
       type: 'datetime',
@@ -53,23 +60,23 @@ export default {
       type: 'reference',
       to: { type: 'author' },
     },
-    {
-      title: 'Related Posts',
-      name: 'relatedPosts',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'post' } }],
-    },
+    // {
+    //   title: 'Related Posts',
+    //   name: 'relatedPosts',
+    //   type: 'array',
+    //   of: [{ type: 'reference', to: { type: 'post' } }],
+    // },
     {
       name: 'mainImage',
       title: 'Main image',
       type: 'mainImage',
     },
-    {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
-    },
+    // {
+    //   name: 'categories',
+    //   title: 'Categories',
+    //   type: 'array',
+    //   of: [{ type: 'reference', to: { type: 'category' } }],
+    // },
     {
       name: 'body',
       title: 'Body',

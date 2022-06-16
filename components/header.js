@@ -9,7 +9,6 @@ import cn from 'classnames';
 import { slugify } from '../lib/helpers';
 
 function NavItem(href, title) {
-  console.log('TITLeaddaa', title);
   const router = useRouter();
   const isActive = router.asPath === href;
   // const { parentTitle, childTitle } = title;

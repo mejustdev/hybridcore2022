@@ -95,7 +95,7 @@ export default {
     //   title: 'Code Example',
     //   type: 'code',
     // },
-    { type: 'youtube' },
+    // { type: 'youtube' },
     // { type: 'instagram' },
     // { type: "codepen" }
   ],

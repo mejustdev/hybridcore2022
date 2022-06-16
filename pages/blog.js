@@ -2,7 +2,6 @@ import Layout from 'components/layout';
 import { getAllPosts } from 'lib/api';
 
 export default function Blog(allPosts) {
-  console.log(allPosts);
   return (
     <>
       <Layout>This is Blog Page</Layout>

@@ -18,7 +18,7 @@ export default function Layout({ preview, children, ...custom_meta }) {
     ...custom_meta,
   };
   return (
-    <>
+    <div className='flex flex-col min-h-screen overflow-hidden'>
       <Head>
         <title>{meta.title}</title>
         <meta property='og:image' content={HOME_OG_IMAGE_URL} />
@@ -47,6 +47,6 @@ export default function Layout({ preview, children, ...custom_meta }) {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 }

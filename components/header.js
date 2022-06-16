@@ -1,109 +1,177 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect, useRef } from 'react';
 import NextLink from 'next/link';
+import useSite from 'lib/hooks/use-site';
+import Dropdown from 'lib/utils/Dropdown';
 
-import { useTheme } from 'next-themes';
-import useSite from '../lib/hooks/use-site';
-import cn from 'classnames';
-
-import { slugify } from '../lib/helpers';
-
-function NavItem(href, title) {
-  const router = useRouter();
-  const isActive = router.asPath === href;
-  // const { parentTitle, childTitle } = title;
-  return (
-    <NextLink href={href}>
-      <a
-        className={cn(
-          isActive
-            ? 'font-semibold text-gray-800 dark:text-gray-200'
-            : 'font-normal text-gray-600 dark:text-gray-400',
-        )}
-      >
-        {title}
-      </a>
-    </NextLink>
-  );
-}
+import { slugify } from 'lib/helpers';
 
 export default function Header() {
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
-
   const { menus } = useSite();
   console.log('DATA', menus);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const mobileNav = useRef(null);
+
+  // close the mobile menu on click outside
+  useEffect(() => {
+    const clickHandler = ({ target }) => {
+      if (!mobileNavOpen || mobileNav.current.contains(target)) return;
+      setMobileNavOpen(false);
+    };
+    document.addEventListener('click', clickHandler);
+    return () => document.removeEventListener('click', clickHandler);
+  });
+
+  // close the mobile menu if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }) => {
+      if (!mobileNavOpen || keyCode !== 27) return;
+      setMobileNavOpen(false);
+    };
+    document.addEventListener('keydown', keyHandler);
+    return () => document.removeEventListener('keydown', keyHandler);
+  });
 
   return (
     <>
-      <h2 className='text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8'>
-        {menus?.map(({ parentText, routesDirect, routesUnderParent }) => {
-          const slugifiedParent = slugify(parentText);
+      <header className='absolute z-30 w-full'>
+        <div className='max-w-6xl px-4 mx-auto sm:px-6'>
+          <div className='flex items-center justify-between h-20'>
+            {/* Site branding */}
+            {/* @TODO: Add Logo */}
+            {/* <div className='flex items-center flex-shrink-0 '>
+              <Link to='/' aria-label='Cruip'>
+                <img
+                  className='w-auto mt-3 h-28 sm:h-32 md:h-48 '
+                  src={require('../images/logo.png')}
+                  alt='site logo'
+                />
+              </Link>
+            </div> */}
 
-          return (
-            <div className='flex flex-col md:flex-row items-center'>
-              {parentText ? (
-                <div>
-                  <div>{parentText}</div>
-                  <div>
-                    {routesUnderParent?.map((el) => {
-                      const slugifiedExternalUrlText = slugify(el?.externalUrlText);
-                      return (
-                        <a
-                          href={`
-                          ${slugifiedParent}/${el?.slug ?? slugifiedExternalUrlText}`}
-                        >
-                          {el?.title ?? el?.externalUrlText}
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  {routesDirect?.map((el) => {
-                    return <a href={el.slug == 'home' ? '/' : el.slug}>{el.title}</a>;
+            {/* Desktop navigation */}
+            <nav className='hidden md:flex md:flex-grow'>
+              <ul className='flex flex-wrap items-center justify-end flex-grow'>
+                {/* Desktop menu links */}
+                {menus?.map(({ parentText, routesDirect, routesUnderParent }) => {
+                  const slugifiedParent = slugify(parentText);
+                  return (
+                    <>
+                      {parentText ? (
+                        <Dropdown title={parentText}>
+                          {routesUnderParent?.map((el) => {
+                            const slugifiedExternalUrlText = slugify(el?.externalUrlText);
+                            return (
+                              <NextLink
+                                href={`${slugifiedParent}/${el?.slug ?? slugifiedExternalUrlText}`}
+                              >
+                                <a className='flex px-4 py-2 text-sm font-medium leading-tight text-gray-400 hover:text-purple-600'>
+                                  {el?.title ?? el?.externalUrlText}
+                                </a>
+                              </NextLink>
+                            );
+                          })}
+                        </Dropdown>
+                      ) : (
+                        routesDirect?.map((el) => {
+                          return (
+                            <li>
+                              <NextLink href={el.slug == 'home' ? '/' : el.slug}>
+                                <a className='flex px-4 py-2 text-sm font-medium leading-tight text-gray-400 hover:text-purple-600'>
+                                  {el.title}
+                                </a>
+                              </NextLink>
+                            </li>
+                          );
+                        })
+                      )}
+                    </>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            {/* Mobile menu */}
+            <div className='md:hidden'>
+              {/* Hamburger button */}
+              <button
+                className={`hamburger ${mobileNavOpen && 'active'}`}
+                aria-controls='mobile-nav'
+                aria-expanded={mobileNavOpen}
+                onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              >
+                <span className='sr-only'>Menu</span>
+                <svg
+                  className='w-6 h-6 text-gray-300 transition duration-150 ease-in-out fill-current hover:text-gray-200'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <rect y='4' width='24' height='2' rx='1' />
+                  <rect y='11' width='24' height='2' rx='1' />
+                  <rect y='18' width='24' height='2' rx='1' />
+                </svg>
+              </button>
+
+              {/*Mobile navigation */}
+              <nav
+                id='mobile-nav'
+                ref={mobileNav}
+                className='absolute left-0 z-20 w-full px-4 overflow-hidden transition-all duration-300 ease-in-out top-full sm:px-6'
+                style={
+                  mobileNavOpen
+                    ? { maxHeight: mobileNav.current.scrollHeight, opacity: 1 }
+                    : { maxHeight: 0, opacity: 0.8 }
+                }
+              >
+                <ul className='px-4 py-2 bg-gray-800'>
+                  {menus?.map(({ parentText, routesDirect, routesUnderParent }) => {
+                    const slugifiedParent = slugify(parentText);
+                    return (
+                      <>
+                        {parentText ? (
+                          <li className='py-2 my-2 '>
+                            <span className='flex py-2 text-gray-300'>{parentText}</span>
+                            <ul className='pl-4'>
+                              {routesUnderParent?.map((el) => {
+                                const slugifiedExternalUrlText = slugify(el?.externalUrlText);
+                                return (
+                                  <li>
+                                    <NextLink
+                                      href={`${slugifiedParent}/${
+                                        el?.slug ?? slugifiedExternalUrlText
+                                      }`}
+                                    >
+                                      <a className='flex py-2 text-sm font-medium text-gray-400 hover:text-gray-200'>
+                                        {el?.title ?? el?.externalUrlText}
+                                      </a>
+                                    </NextLink>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </li>
+                        ) : (
+                          routesDirect?.map((el) => {
+                            return (
+                              <li>
+                                <NextLink href={el.slug == 'home' ? '/' : el.slug}>
+                                  <a className='flex py-2 text-gray-300 hover:text-gray-200'>
+                                    {el.title}
+                                  </a>
+                                </NextLink>
+                              </li>
+                            );
+                          })
+                        )}
+                      </>
+                    );
                   })}
-                </div>
-              )}
+                </ul>
+              </nav>
             </div>
-          );
-        })}
-      </h2>
-      <button
-        aria-label='Toggle Dark Mode'
-        type='button'
-        className='w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center  hover:ring-2 ring-gray-300  transition-all'
-        onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-      >
-        {mounted && (
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            className='w-5 h-5 text-gray-800 dark:text-gray-200'
-          >
-            {resolvedTheme === 'dark' ? (
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z'
-              />
-            ) : (
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'
-              />
-            )}
-          </svg>
-        )}
-      </button>
+          </div>
+        </div>
+      </header>
     </>
   );
 }

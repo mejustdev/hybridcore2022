@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;500;600;700;800;900&display=fallback');
+/* @import 'range-slider.scss';
+@import 'theme.scss';
+@import 'toggle-switch.scss'; */
+/* @import 'utility-patterns.scss'; */
+
+@tailwind base;
+@tailwind components;
+@layer utilities {
+  /* Typography */
+.h1 {
+  @apply text-4xl;
+  @apply font-extrabold;
+  @apply leading-tight;
+  @apply tracking-tighter;
+}
+
+.h2 {
+  @apply text-3xl;
+  @apply font-extrabold;
+  @apply leading-tight;
+  @apply tracking-tighter;
+}
+
+.h3 {
+  @apply text-3xl;
+  @apply font-bold;
+  @apply leading-tight;
+}
+
+.h4 {
+  @apply text-2xl;
+  @apply font-bold;
+  @apply leading-snug;
+  @apply tracking-tight;
+}
+
+@screen md {
+  .h1 {
+    @apply text-5xl;
+  }
+
+  .h2 {
+    @apply text-4xl;
+  }
+}
+
+/* Buttons */
+.btn,
+.btn-sm {
+  @apply font-medium;
+  @apply inline-flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply border;
+  @apply border-transparent;
+  @apply rounded-sm;
+  @apply leading-snug;
+  @apply transition;
+  @apply duration-150;
+  @apply ease-in-out;
+}
+
+.btn {
+  @apply px-8;
+  @apply py-3;
+}
+
+.btn-sm {
+  @apply px-4;
+  @apply py-2;
+}
+
+  .apexcharts-tooltip {
+    background: #f3f3f3;
+    color: black;
+  }
+  .chart-container {
+    position: relative;
+    height: 80vh;
+    width: 90vw;
+    object-fit: contain;
+  }
+  .divider {
+    background: linear-gradient(
+      90deg,
+      rgba(192, 204, 218, 0.1) 0%,
+      rgba(192, 204, 218, 0.6) 50.38%,
+      rgba(192, 204, 218, 0.1) 100%
+    );
+  }
+  .text-gradient {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Additional styles */
+@import 'additional-styles/utility-patterns.scss';
+@import 'additional-styles/range-slider.scss';
+@import 'additional-styles/toggle-switch.scss';
+@import 'additional-styles/theme.scss';
+
+@tailwind utilities;
+
+/* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
+@responsive {
+  .rtl {
+    direction: rtl;
+  }
+}
+
+ /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
+[x-cloak] {
+  display: none;
+}

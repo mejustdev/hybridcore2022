@@ -1,0 +1,63 @@
+// Typography
+.h1 {
+  @apply text-4xl;
+  @apply font-extrabold;
+  @apply leading-tight;
+  @apply tracking-tighter;
+}
+
+.h2 {
+  @apply text-3xl;
+  @apply font-extrabold;
+  @apply leading-tight;
+  @apply tracking-tighter;
+}
+
+.h3 {
+  @apply text-3xl;
+  @apply font-bold;
+  @apply leading-tight;
+}
+
+.h4 {
+  @apply text-2xl;
+  @apply font-bold;
+  @apply leading-snug;
+  @apply tracking-tight;
+}
+
+@screen md {
+  .h1 {
+    @apply text-5xl;
+  }
+
+  .h2 {
+    @apply text-4xl;
+  }
+}
+
+// Buttons
+.btn,
+.btn-sm {
+  @apply font-medium;
+  @apply inline-flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply border;
+  @apply border-transparent;
+  @apply rounded-sm;
+  @apply leading-snug;
+  @apply transition;
+  @apply duration-150;
+  @apply ease-in-out;
+}
+
+.btn {
+  @apply px-8;
+  @apply py-3;
+}
+
+.btn-sm {
+  @apply px-4;
+  @apply py-2;
+}

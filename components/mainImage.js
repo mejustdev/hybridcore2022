@@ -1,7 +1,7 @@
 import React from 'react';
 import { imageBuilder } from '../lib/sanity';
 
-const MainImage = ({ mainImage, url, width = 1200 }) => {
+const MainImage = ({ mainImage, url, width = 1200, stil }) => {
   const imgUrl =
     mainImage &&
     imageBuilder(mainImage)
@@ -13,7 +13,7 @@ const MainImage = ({ mainImage, url, width = 1200 }) => {
 
   return imgUrl ? (
     <a href={url} target='blank'>
-      <img src={imgUrl} alt={mainImage.alt || ''} />{' '}
+      <img src={imgUrl} alt={mainImage.alt || ''} class={stil} />{' '}
     </a>
   ) : (
     <></>

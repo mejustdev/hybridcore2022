@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import NextLink from 'next/link';
 import useSite from 'lib/hooks/use-site';
 import Dropdown from 'lib/utils/Dropdown';
+import Logo from '../components/partials/logo';
 
 import { slugify } from 'lib/helpers';
 
 export default function Header() {
-  const { menus } = useSite();
-  console.log('DATA', menus);
+  const { menus, siteSettings } = useSite();
+  console.log('menus', menus);
+  console.log('siteSettings', siteSettings);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const mobileNav = useRef(null);
@@ -39,15 +41,15 @@ export default function Header() {
           <div className='flex items-center justify-between h-20'>
             {/* Site branding */}
             {/* @TODO: Add Logo */}
-            {/* <div className='flex items-center flex-shrink-0 '>
-              <Link to='/' aria-label='Cruip'>
-                <img
-                  className='w-auto mt-3 h-28 sm:h-32 md:h-48 '
-                  src={require('../images/logo.png')}
-                  alt='site logo'
+            <div className='flex items-center flex-shrink-0 '>
+              <NextLink href='/'>
+                <Logo
+                  mainImage={siteSettings.logo}
+                  stil={'w-auto mt-3 h-12 sm:h-14 md:h-16'}
+                  url={'/'}
                 />
-              </Link>
-            </div> */}
+              </NextLink>
+            </div>
 
             {/* Desktop navigation */}
             <nav className='hidden md:flex md:flex-grow'>
@@ -59,11 +61,12 @@ export default function Header() {
                     <>
                       {parentText ? (
                         <Dropdown title={parentText}>
-                          {routesUnderParent?.map((el) => {
+                          {routesUnderParent?.map((el, index) => {
                             const slugifiedExternalUrlText = slugify(el?.externalUrlText);
                             return (
                               <NextLink
                                 href={`${slugifiedParent}/${el?.slug ?? slugifiedExternalUrlText}`}
+                                replace
                               >
                                 <a className='flex px-4 py-2 text-sm font-medium leading-tight text-gray-400 hover:text-purple-600'>
                                   {el?.title ?? el?.externalUrlText}
@@ -73,10 +76,10 @@ export default function Header() {
                           })}
                         </Dropdown>
                       ) : (
-                        routesDirect?.map((el) => {
+                        routesDirect?.map((el, index) => {
                           return (
                             <li>
-                              <NextLink href={el.slug == 'home' ? '/' : el.slug}>
+                              <NextLink href={el.slug == 'home' ? '/' : el.slug} replace>
                                 <a className='flex px-4 py-2 text-sm font-medium leading-tight text-gray-400 hover:text-purple-600'>
                                   {el.title}
                                 </a>

@@ -14,6 +14,13 @@ export default {
       title: 'Subheader',
     },
     {
+      name: 'isTab',
+      type: 'boolean',
+      title: 'Do you want to show in tab?',
+      description: 'In Tab view, selected image will be shown',
+      initialValue: false,
+    },
+    {
       name: 'items',
       type: 'array',
       title: 'Items',

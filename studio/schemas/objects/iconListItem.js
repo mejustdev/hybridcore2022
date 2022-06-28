@@ -23,23 +23,52 @@ export default {
       name: 'subHeader',
       type: 'simpleBlockContent',
       title: 'Subheader',
+      hidden: ({ document }) => document?.title === 'Team',
+    },
+    {
+      name: 'button',
+      type: 'boolean',
+      title: 'Do you want to add button for link/url?',
+      initialValue: false,
+    },
+    {
+      name: 'link',
+      type: 'object',
+      title: 'Button Link',
+      fields: [
+        {
+          name: 'buttonText',
+          type: 'string',
+          title: 'Button Text',
+        },
+        {
+          name: 'external',
+          type: 'url',
+          title: 'URL',
+          description: 'Use fully qualified URLS for external link',
+          hidden: ({ parent, value }) => !value && parent?.internal,
+        },
+        {
+          name: 'internal',
+          type: 'reference',
+          to: [{ type: 'page' }],
+          hidden: ({ parent, value }) => !value && parent?.external,
+        },
+      ],
+      hidden: ({ parent }) => !parent.button,
     },
 
-    // {
-    //   name: 'tagline',
-    //   type: 'simpleBlockContent',
-    // },
+    {
+      name: 'position',
+      type: 'string',
+      title: 'Position',
+      hidden: ({ document }) => document?.title !== 'Team',
+    },
   ],
   // preview: {
   //   select: {
-  //     title: 'heading',
-  //     subtitle: 'label',
-  //     disabled: 'disabled',
-  //   },
-  //   prepare({ title, disabled }) {
-  //     return {
-  //       title: `Hero: ${disabled ? 'DISABLED' : title}`,
-  //     };
+  //     title: 'header',
+  //     media: 'image',
   //   },
   // },
 };

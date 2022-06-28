@@ -39,13 +39,11 @@ export default function Layout({ preview, children, ...custom_meta }) {
       </Head>
 
       <Header />
+      <main className='flex-grow'>
+        {preview && <PreviewAlert preview={preview} />}
 
-      {preview && <PreviewAlert preview={preview} />}
-
-      <div className='min-h-screen'>
-        <main>{children}</main>
-      </div>
-
+        {children}
+      </main>
       <Footer />
     </div>
   );

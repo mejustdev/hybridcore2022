@@ -6,6 +6,9 @@ export default {
   description: 'Simple text block',
   type: 'object',
   // icon: RiFileTextLine,
+  initialValue: {
+    highlighted: false,
+  },
   fields: [
     {
       name: 'text',
@@ -26,6 +29,11 @@ export default {
           },
         },
       ],
+    },
+    {
+      name: 'highlighted',
+      type: 'boolean',
+      title: 'Highlight text?',
     },
   ],
   preview: {

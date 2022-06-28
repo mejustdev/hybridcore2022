@@ -1,8 +1,7 @@
 import React from 'react';
-import { Highlight, InlineCode } from '../marks';
+import { Highlight } from '../marks';
 
 const highlightIcon = () => <span style={{ fontWeight: 'bold' }}>H</span>;
-const codeIcon = () => <code style={{ fontWeight: 'bold' }}>C</code>;
 
 export default {
   title: 'Post body',
@@ -37,22 +36,14 @@ export default {
           { title: 'Emphasis', value: 'em' },
           { title: 'Underline', value: 'underline' },
           { title: 'Strike', value: 'strike-through' },
-          {
-            title: 'Highlight',
-            value: 'highlight',
-            blockEditor: {
-              icon: highlightIcon,
-              render: Highlight,
-            },
-          },
-          {
-            title: 'Inline Code',
-            value: 'inlineCode',
-            blockEditor: {
-              icon: codeIcon,
-              render: InlineCode,
-            },
-          },
+          // {
+          //   title: 'Highlight',
+          //   value: 'highlight',
+          //   blockEditor: {
+          //     icon: highlightIcon,
+          //     render: Highlight,
+          //   },
+          // },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -91,12 +82,5 @@ export default {
       type: 'mainImage',
       options: { hotspot: true },
     },
-    // {
-    //   title: 'Code Example',
-    //   type: 'code',
-    // },
-    // { type: 'youtube' },
-    // { type: 'instagram' },
-    // { type: "codepen" }
   ],
 };

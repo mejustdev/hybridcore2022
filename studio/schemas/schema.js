@@ -6,6 +6,7 @@ import post from './documents/post';
 import author from './documents/author';
 import menu from './documents/menu';
 import page from './documents/page';
+import siteSettings from './documents/siteSettings';
 // import category from './documents/category';
 
 // Objects
@@ -24,7 +25,8 @@ import iconList from './objects/iconList';
 import partners from './objects/partners';
 import iconListItem from './objects/iconListItem';
 import simpleBlockContent from './objects/simpleBlockContent';
-// import youtube from './objects/youtube';
+import youtube from './objects/youtube';
+import embed from './objects/embed';
 // import instagram from './objects/instagram';
 // import codepen from './objects/codepen';
 
@@ -35,6 +37,7 @@ export default createSchema({
     author,
     post,
     page,
+    siteSettings,
     hero,
     simpleBlockContent,
     bodyPortableText,
@@ -51,10 +54,11 @@ export default createSchema({
     textBlock,
     textSlider,
     link,
+    youtube,
+    embed,
     // category,
     // comment,
     // codepen,
-    // youtube,
     // instagram,
   ]),
 });

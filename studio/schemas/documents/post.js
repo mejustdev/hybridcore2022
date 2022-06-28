@@ -23,6 +23,18 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: 'Is it text or only video?',
+      name: 'posttype',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Text', value: 'text' },
+          { title: 'Video', value: 'video' },
+        ],
+        layout: 'radio',
+      },
+    },
+    {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -31,7 +43,7 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      hidden: ({ parent }) => parent.isParentText === false,
+      hidden: ({ parent }) => parent.isParentText === false || parent?.posttype === 'video',
       validation: (Rule) =>
         Rule.required().warning('Please only click the button without typing for now'),
     },
@@ -39,13 +51,12 @@ export default {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'excerpt',
       title: 'Excerpt',
       type: 'excerptPortableText',
-      validation: (Rule) => Rule.required(),
+      hidden: ({ parent }) => parent?.posttype === 'video',
     },
 
     {
@@ -59,6 +70,7 @@ export default {
       title: 'Author',
       type: 'reference',
       to: { type: 'author' },
+      hidden: ({ parent }) => parent?.posttype === 'video',
     },
     // {
     //   title: 'Related Posts',
@@ -81,7 +93,9 @@ export default {
       name: 'body',
       title: 'Body',
       type: 'bodyPortableText',
+      hidden: ({ parent }) => parent?.posttype === 'video',
     },
+    { name: 'youtube', type: 'youtube' },
   ],
   orderings: [
     {

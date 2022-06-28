@@ -48,8 +48,13 @@ export default {
       title: 'Page header title',
       type: 'string',
       // validation: (Rule) => Rule.required(),
-      hidden: ({ parent }) => parent?.title === 'Home',
+      hidden: ({ parent }) => parent?.title === 'Home' || parent?.title === 'Covid 19 Dashboard',
       // group: 'team',
+    },
+    {
+      name: 'embed',
+      type: 'embed',
+      hidden: ({ parent }) => parent?.title !== 'Covid 19 Dashboard',
     },
     {
       name: 'pageBuilder',
@@ -63,7 +68,7 @@ export default {
         { type: 'mainImage' },
         { type: 'textSlider' },
       ],
-      hidden: ({ parent }) => parent?.title === 'Team',
+      hidden: ({ parent }) => parent?.title === 'Team' || parent?.title === 'Covid 19 Dashboard',
     },
 
     {

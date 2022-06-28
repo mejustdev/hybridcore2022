@@ -2,31 +2,120 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'accent-1': '#FAFAFA',
-        'accent-2': '#EAEAEA',
-        'accent-7': '#333',
-        success: '#0070f3',
-        cyan: '#79FFE1',
+        gray: {
+          100: '#EBF1F5',
+          200: '#D9E3EA',
+          300: '#C5D2DC',
+          400: '#9BA9B4',
+          500: '#707D86',
+          600: '#55595F',
+          700: '#33363A',
+          800: '#25282C',
+          900: '#151719',
+        },
+        purple: {
+          100: '#F4F4FF',
+          200: '#E2E1FF',
+          300: '#CBCCFF',
+          400: '#ABABFF',
+          500: '#8D8DFF',
+          600: '#5D5DFF',
+          700: '#4B4ACF',
+          800: '#38379C',
+          900: '#262668',
+        },
       },
       spacing: {
-        28: '7rem',
+        '9/16': '56.25%',
+        '3/4': '75%',
+        '1/1': '100%',
       },
-      letterSpacing: {
-        tighter: '-.04em',
-      },
-      lineHeight: {
-        tight: 1.2,
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        'architects-daughter': ['"Architects Daughter"', 'sans-serif'],
       },
       fontSize: {
-        '5xl': '2.5rem',
-        '6xl': '2.75rem',
-        '7xl': '4.5rem',
-        '8xl': '6.25rem',
+        xs: '0.75rem',
+        sm: '0.875rem',
+        base: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
+        '6xl': '4rem',
       },
-      boxShadow: {
-        small: '0 5px 10px rgba(0, 0, 0, 0.12)',
-        medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+      inset: {
+        full: '100%',
       },
+      letterSpacing: {
+        tighter: '-0.02em',
+        tight: '-0.01em',
+        normal: '0',
+        wide: '0.01em',
+        wider: '0.02em',
+        widest: '0.4em',
+      },
+      minWidth: {
+        10: '2.5rem',
+      },
+      scale: {
+        98: '.98',
+      },
+      aspectRatio: {
+        none: 0,
+        square: [1, 1],
+        '16/9': [16, 9],
+        '4/3': [4, 3],
+        '21/9': [21, 9],
+      },
+      customForms: (theme) => ({
+        default: {
+          'input, textarea, multiselect, select, checkbox, radio': {
+            backgroundColor: 'transparent',
+            borderColor: theme('colors.gray.700'),
+            borderRadius: theme('borderRadius.sm'),
+            '&:focus': {
+              outline: undefined,
+              boxShadow: undefined,
+              borderColor: theme('colors.gray.500'),
+            },
+          },
+          'input, textarea, multiselect, select': {
+            backgroundColor: 'transparent',
+            fontSize: undefined,
+            lineHeight: undefined,
+            paddingTop: theme('spacing.3'),
+            paddingRight: theme('spacing.4'),
+            paddingBottom: theme('spacing.3'),
+            paddingLeft: theme('spacing.4'),
+          },
+          'input, textarea': {
+            '&::placeholder': {
+              color: theme('colors.gray.500'),
+            },
+          },
+          select: {
+            paddingRight: theme('spacing.10'),
+            iconColor: theme('colors.gray.500'),
+          },
+          'checkbox, radio': {
+            color: theme('colors.purple.600'),
+            backgroundColor: 'transparent',
+          },
+        },
+      }),
     },
-  }
-}
+  },
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    translate: ['responsive', 'hover', 'focus', 'group-hover'],
+    boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    aspectRatio: ['responsive'],
+    textOverflow: ['responsive', 'group-hover'],
+  },
+  plugins: [],
+};
